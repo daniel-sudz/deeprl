@@ -119,12 +119,13 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
             # Convert to PyTorch tensors
             batch = ptu.from_numpy(batch)
 
-            update_info = agent.update_critic(
+            update_info = agent.update(
                 obs=batch["observations"],
                 action=batch["actions"],
                 reward=batch["rewards"],
                 next_obs=batch["next_observations"],
-                done=batch["dones"]
+                done=batch["dones"],
+                step=step
             )
 
             # Logging code
